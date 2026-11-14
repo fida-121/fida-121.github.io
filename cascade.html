@@ -75,6 +75,7 @@ li{margin-bottom:6px}
 .btn{display:inline-block;padding:10px 18px;border-radius:8px;font-weight:600;font-size:15px;border:1px solid var(--border);color:var(--text);background:var(--surface);margin-right:8px;margin-top:6px}
 .btn.primary{background:var(--accent);color:#06201d;border-color:var(--accent)}
 .btn:hover{text-decoration:none;filter:brightness(1.08)}
+button.btn{font:inherit;font-size:15px;font-weight:600;cursor:pointer}
 footer{padding:32px 0;color:var(--muted);font-size:14px;border-top:1px solid var(--border)}
 </style>
 </head>
@@ -180,7 +181,8 @@ footer{padding:32px 0;color:var(--muted);font-size:14px;border-top:1px solid var
   <section>
     <h2>Discuss this work</h2>
     <p>I'm happy to talk about CASCADE, collaboration or graduate research opportunities.</p>
-    <a class="btn primary" href="mailto:fida57840@gmail.com">Email me</a>
+    <a class="btn primary" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=fida57840@gmail.com" target="_blank" rel="noopener">Email me (Gmail)</a>
+    <button class="btn" type="button" data-copy="fida57840@gmail.com">Copy email</button>
     <a class="btn" href="/Fida_Hussain_CV.pdf">Download CV</a>
     <a class="btn" href="https://github.com/fida-121">GitHub</a>
   </section>
@@ -191,6 +193,17 @@ footer{padding:32px 0;color:var(--muted);font-size:14px;border-top:1px solid var
 <footer>
   <div class="wrap">© <span id="yr">2026</span> Fida Hussain · <a href="/">Back to portfolio</a></div>
 </footer>
-<script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+function fallbackCopy(t, done){var a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();try{document.execCommand('copy');done();}catch(e){}document.body.removeChild(a);}
+document.querySelectorAll('[data-copy]').forEach(function(b){
+  b.addEventListener('click',function(){
+    var t=b.getAttribute('data-copy'), o=b.textContent;
+    var done=function(){b.textContent='Copied!';setTimeout(function(){b.textContent=o;},1500);};
+    if(navigator.clipboard && window.isSecureContext){navigator.clipboard.writeText(t).then(done,function(){fallbackCopy(t,done);});}
+    else{fallbackCopy(t,done);}
+  });
+});
+</script>
 </body>
 </html>
