@@ -93,6 +93,8 @@ h2{font-size:1.6rem;margin-bottom:6px;letter-spacing:-.01em}
 .skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
 .skills h4{font-size:14px;color:var(--accent);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em}
 .contact p{margin-bottom:6px}
+.copy{font:inherit;font-size:13px;padding:2px 10px;border-radius:6px;border:1px solid var(--border);background:var(--surface);color:var(--text);cursor:pointer}
+.copy:hover{border-color:var(--accent)}
 footer{padding:32px 0;color:var(--muted);font-size:14px;border-top:1px solid var(--border)}
 </style>
 </head>
@@ -121,7 +123,7 @@ footer{padding:32px 0;color:var(--muted);font-size:14px;border-top:1px solid var
     <div class="cta">
       <a class="btn primary" href="#projects">View projects</a>
       <a class="btn" href="Fida_Hussain_CV.pdf">Download CV</a>
-      <a class="btn" href="mailto:fida57840@gmail.com">Get in touch</a>
+      <a class="btn" href="#contact">Get in touch</a>
     </div>
     <div class="stats">
       <div class="stat"><b>3.717 / 4.00</b><span>CGPA, UET Lahore</span></div>
@@ -300,9 +302,14 @@ footer{padding:32px 0;color:var(--muted);font-size:14px;border-top:1px solid var
   <section id="contact" class="contact">
     <h2>Contact</h2>
     <p class="sub">Happy to talk about research, collaboration or my application.</p>
-    <p><b>Email:</b> <a href="mailto:fida57840@gmail.com">fida57840@gmail.com</a></p>
+    <p><b>Email:</b> fida57840@gmail.com
+      <button class="copy" type="button" data-copy="fida57840@gmail.com">Copy</button>
+      · <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=fida57840@gmail.com" target="_blank" rel="noopener">Compose in Gmail</a>
+      · <a href="mailto:fida57840@gmail.com">Open mail app</a></p>
     <p><b>GitHub:</b> <a href="https://github.com/fida-121">github.com/fida-121</a></p>
     <p><b>LinkedIn:</b> <a href="https://linkedin.com/in/fida-hussain-c2005">linkedin.com/in/fida-hussain-c2005</a></p>
+    <p><b>Phone:</b> <a href="tel:+923124489925">+92 312 4489925</a>
+      <button class="copy" type="button" data-copy="+92 312 4489925">Copy</button></p>
     <p><b>Location:</b> Lahore, Pakistan</p>
     <div class="cta"><a class="btn primary" href="Fida_Hussain_CV.pdf">Download CV (PDF)</a></div>
   </section>
@@ -313,6 +320,17 @@ footer{padding:32px 0;color:var(--muted);font-size:14px;border-top:1px solid var
 <footer>
   <div class="wrap">© <span id="yr">2026</span> Fida Hussain</div>
 </footer>
-<script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+function fallbackCopy(t, done){var a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();try{document.execCommand('copy');done();}catch(e){}document.body.removeChild(a);}
+document.querySelectorAll('[data-copy]').forEach(function(b){
+  b.addEventListener('click',function(){
+    var t=b.getAttribute('data-copy'), o=b.textContent;
+    var done=function(){b.textContent='Copied!';setTimeout(function(){b.textContent=o;},1500);};
+    if(navigator.clipboard && window.isSecureContext){navigator.clipboard.writeText(t).then(done,function(){fallbackCopy(t,done);});}
+    else{fallbackCopy(t,done);}
+  });
+});
+</script>
 </body>
 </html>
